@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>母の手記 - Mother's Notes</title>
+    <style>
+        body {
+            font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fafafa;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0e8f4 100%);
+            color: #2c3e50;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .back-link a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.9em;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        .back-link a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .article {
+            margin-bottom: 60px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .article-header {
+            background: linear-gradient(45deg, #f8d7da 0%, #fde6e9 100%);
+            color: #2c3e50;
+            padding: 25px 30px;
+            text-align: center;
+        }
+        .article-title {
+            font-size: 1.8em;
+            margin: 0 0 10px 0;
+            font-weight: 400;
+        }
+        .article-date {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        .content-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        .japanese-content, .english-content {
+            padding: 30px;
+        }
+        .japanese-content {
+            background-color: #fff;
+            border-right: 3px solid #f0f0f0;
+        }
+        .english-content {
+            background-color: #fbfbfb;
+        }
+        .language-label {
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .japanese-content .language-label {
+            color: #d63384;
+        }
+        .english-content .language-label {
+            color: #0d6efd;
+        }
+        h2 {
+            color: #2c3e50;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+            margin: 25px 0 15px 0;
+        }
+        .dialogue {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #17a2b8;
+            border-radius: 0 8px 8px 0;
+        }
+        .question {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        .answer {
+            color: #212529;
+            margin-left: 10px;
+        }
+        .note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        .note strong {
+            color: #856404;
+        }
+        .metadata {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #dee2e6;
+        }
+        .numbered-list {
+            counter-reset: item;
+            padding-left: 0;
+        }
+        .numbered-list li {
+            display: block;
+            margin: 15px 0;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            position: relative;
+        }
+        .numbered-list li:before {
+            content: counter(item) ". ";
+            counter-increment: item;
+            font-weight: bold;
+            color: #007bff;
+            font-size: 1.1em;
+        }
+        .footer {
+            margin-top: 60px;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0e8f4 100%);
+            color: #2c3e50;
+            border-radius: 15px;
+            text-align: center;
+        }
+        .footer h3 {
+            margin: 0 0 20px 0;
+            font-size: 1.5em;
+            font-weight: 300;
+        }
+        .footer p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .footer a {
+            color: #3498db;
+            text-decoration: underline;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        .footer a:hover {
+            opacity: 1;
+        }
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        @media (max-width: 768px) {
+            .content-container {
+                grid-template-columns: 1fr;
+            }
+            .japanese-content {
+                border-right: none;
+                border-bottom: 3px solid #f0f0f0;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+            .back-link {
+                position: static;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="back-link">
+            <a href="https://trgr-karasutoragara.github.io/index.html">← Back to future AI x dignity</a>
+        </div>
+        <h1>母の手記</h1>
+        <p>Mother's Notes - A Collection of Life Stories</p>
+        <p>鈴木薫（77歳）の人生の記録と知恵</p>
+        <p style="font-size: 0.85em; margin-top: 15px; font-style: italic; opacity: 0.8;">Note: "Suzuki Kaoru" is the pen name used by the author.</p>
+    </div>
+
+    <!-- Article 1: Cattle and Father -->
+    <div class="article">
+        <div class="article-header">
+            <div class="article-title">
+                牛と父と私と：インタビュー<br>
+                <span style="font-size: 0.85em; font-weight: 300;">Cattle, Father, and Me: An Interview</span>
+            </div>
+            <div class="article-date">2023年11月10日 18:31</div>
+            <div style="font-size: 0.8em; margin-top: 10px;">
+                <a href="https://note.com/p_s_n/n/n2f80f42fdb74" target="_blank" style="color: #2c3e50; opacity: 0.8;">Original: https://note.com/p_s_n/n/n2f80f42fdb74</a>
+            </div>
+        </div>
+        <div class="content-container">
+            <div class="japanese-content">
+                <div class="language-label">🇯🇵 日本語オリジナル</div>
+                
+                <div class="dialogue">
+                    <div class="question">「長野県で、お祖父さんが牛と働いたのは知っています。農地はどのくらいの広さでしたか？」</div>
+                    <div class="answer">「畑3枚、田んぼは大人1人と子供3人がギリギリ食べられる程度。果物も野菜も、父が器用に育てたけど、収穫量や面積を数字では把握していません」</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">「まだ、小学生でしたね、もっと幼い頃もありますね。牛は、お祖父ちゃんとどう働きましたか？」</div>
+                    <div class="answer">「田んぼの畝を耕す。耕運機が普及する前は、牛が耕したの。牛が引く前は、万能鍬で人が耕した」</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">「仕事風景はどんな感じですか？」</div>
+                    <div class="answer">「お祖父さんが、スキを固定する。私は5, 6歳で、牛がまっすぐ歩けるように、リードする」</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">「なるほど、牛を親子で挟む感じですね」<br>「牛の種類はホルスタインではないですよね？」</div>
+                    <div class="answer">「あかうしと呼んでいました。毛の色は茶色。肉にはしないけど、肉牛の種です」</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">「性別は、女の子でしたっけ」</div>
+                    <div class="answer">「そう、女の子」</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">「角を落としたりしましたか？」</div>
+                    <div class="answer">「しないしない、女の子でも角は成長すると生えます」</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">「角で事故は起きませんか？」</div>
+                    <div class="answer">「優しい子だから、我が家では起きていません。けれど父からは、『角で人を振り回せる。角は牛の武器だ』と習いました」</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">「蹴るのは、馬が後ろ、牛が横でしたっけ」</div>
+                    <div class="answer">「そう。お祖父ちゃんは、『馬の蹴る力は、人の頭蓋骨が割れるほどの力だ』と聞いています」</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">「牛と相性の悪い人もいたと聞いていますが、怖くなかったですか」</div>
+                    <div class="answer">「まったく怖いことはないです。例えば、牛の小屋は牛のテリトリーだから、気軽に入ったりしません。けれど、父が監督している時に、牛小屋から物を取り出しても、牛は理解してくれました。父が立ち合っているから、安心しているのでしょう」</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">「母さんが、牛と暮らして得たものは何ですか？」</div>
+                    <div class="answer">「気持ちが、10与えると10以上返してくれる。世話をすると、裏切らない。<br><br>犬や猫を飼うときも、父の仕事を見習いました。例えば、排泄を確認してお腹がゆるいとか、オス猫が排尿に時間がかかると、早めに獣医さんに相談できました」</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">「犬や猫が大病せずに長生きをしたのは、早期発見で問題解決したことと、そのルーツが牛だったのは、犬も猫も驚いているでしょうね」</div>
+                </div>
+
+                <h2>インタビュー後記</h2>
+                <p>現代は、確かに豊かになりました。けれど、10与えれば10以上返してくれることを、種族を越えての、非言語コミュニケーションでの信頼関係を体験する機会はとても少ないです。また、残念ですが、これから大人になる未成年に、自衛のために「疑うこと」を教える必要もあります。70年以上前を美化する意図はないですが、文化が異なるので、学ぶ点は大きいと感じました。（Trgr KarasuToragara・記）</p>
+
+                <div class="note">
+                    <strong>注記</strong><br>
+                    2023年5月から、彼女はAIを学び始めた。Windowsも検索エンジンも慣れることが無かったが、自然言語処理が出来ることが気に入り学ぶことが出来た。「2023年11月10日 18:31」は、まだAIを使う習慣が出来ておらず、全て私が担当している。
+                </div>
+            </div>
+            
+            <div class="english-content">
+                <div class="language-label">🇺🇸 English Translation</div>
+                
+                <div class="dialogue">
+                    <div class="question">"I know that your father worked with cattle in Nagano Prefecture. How large was the farmland?"</div>
+                    <div class="answer">"Three vegetable plots, and rice paddies just enough to barely feed one adult and three children. Father skillfully grew fruits and vegetables too, but I don't have numerical data on the harvest amounts or area."</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">"You were still in elementary school, and even younger at times. How did the cattle work with your father?"</div>
+                    <div class="answer">"Plowing the rice paddy furrows. Before cultivators became widespread, cattle did the plowing. Before cattle pulled them, people plowed with hoes."</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">"What did the work scene look like?"</div>
+                    <div class="answer">"Father would secure the plow. I was 5 or 6 years old, leading the cattle so they could walk straight."</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">"I see, so you sandwiched the cattle between parent and child."<br>"The cattle weren't Holstein, were they?"</div>
+                    <div class="answer">"We called them 'akaushi' (red cattle). Their coat was brown. We didn't use them for meat, but they were a beef cattle breed."</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">"The gender was female, wasn't it?"</div>
+                    <div class="answer">"Yes, female."</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">"Did you remove their horns?"</div>
+                    <div class="answer">"No, no. Even females grow horns as they mature."</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">"Didn't accidents happen with the horns?"</div>
+                    <div class="answer">"She was a gentle creature, so no accidents happened in our house. But Father taught me, 'Horns can swing people around. Horns are a cow's weapon.'"</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">"Kicking - horses kick backward, cattle kick sideways, right?"</div>
+                    <div class="answer">"Yes. Father told me, 'A horse's kick has enough force to crack a human skull.'"</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">"I heard that some people didn't get along well with cattle. Weren't you afraid?"</div>
+                    <div class="answer">"I wasn't afraid at all. For example, the cattle shed was the cow's territory, so I wouldn't casually enter. But when Father was supervising and I took things from the cattle shed, the cow understood. She was probably at ease because Father was there."</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">"What did you gain from living with cattle?"</div>
+                    <div class="answer">"If you give 10, you get back more than 10. If you care for them, they won't betray you.<br><br>When we kept dogs and cats later, I followed Father's example. For instance, by checking their excrement, I could tell if their stomach was loose, or if a male cat was taking too long to urinate, I could consult the veterinarian early."</div>
+                </div>
+
+                <div class="dialogue">
+                    <div class="question">"The fact that dogs and cats lived long lives without serious illness through early detection and problem-solving, with its roots in cattle care - the dogs and cats must be surprised by that connection."</div>
+                </div>
+
+                <h2>Post-Interview Reflection</h2>
+                <p>Modern times have certainly become prosperous. However, there are very few opportunities to experience trust relationships through non-verbal communication across species - relationships where giving 10 returns more than 10. Unfortunately, we also need to teach young people who are about to become adults to "be suspicious" for self-defense. I don't intend to romanticize life 70+ years ago, but because the culture was different, I feel there's much to learn. (Recorded by Trgr KarasuToragara)</p>
+
+                <div class="note">
+                    <strong>Note</strong><br>
+                    She began learning AI in May 2023. Although she never became comfortable with Windows or search engines, she was able to learn because she liked the capability of natural language processing. For "November 10, 2023 18:31," she hadn't yet developed the habit of using AI, so I handled everything.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article 2: Tokyo Decision -->
+    <div class="article">
+        <div class="article-header">
+            <div class="article-title">
+                60数年前、あの日、東京行きを決めて良かったこと<br>
+                <span style="font-size: 0.85em; font-weight: 300;">What I'm Glad I Decided: Going to Tokyo Over 60 Years Ago</span>
+            </div>
+            <div class="article-date">2024年7月29日 21:41</div>
+            <div style="font-size: 0.8em; margin-top: 10px;">
+                <a href="https://note.com/p_s_n/n/n2bc96896dafe" target="_blank" style="color: #2c3e50; opacity: 0.8;">Original: https://note.com/p_s_n/n/n2bc96896dafe</a>
+            </div>
+        </div>
+        <div class="content-container">
+            <div class="japanese-content">
+                <div class="language-label">🇯🇵 日本語オリジナル</div>
+                
+                <p>私の人生は振り返ってみると、多くの選択と困難に満ちていました。自分で選んでよかったことは、親から「東京で暮らすこともできるけれど、お前の気持ちでどうするかを決める」と言われ、「行く」と答えたことです。理由はハンデのある身で農村で生きるのは困難だからです。</p>
+
+                <p>両親は引揚者で、家は貧しく、戦後の混乱期で世の中に何もなく、ないないずくしの中で育ちました。母は結核で亡くなり、父は男手一つで私ときょうだいを育ててくれました。</p>
+
+                <p>私は幼い頃元気いっぱいの子どもでしたが、ヨチヨチ歩きの頃にガラスを踏み抜き、それが元で小学1年生の秋から歩けなくなり、小学5生の秋頃にギブスをつけ松葉杖でやっと学校へ戻りました。</p>
+
+                <p>その間、骨結核を患い、地元の病院では足を切断するしかないと言われました。幸い山の向こうの病院の医師は、私の骨盤の骨を足首に移植することで足を残してくれました。このことは一生の感謝です。だから、心から「やっと」と実感しました。</p>
+
+                <p>中学2年生からは東京で暮らしました。父は仕事が忙しかったので会社で食事をし、私は自炊になりました。お風呂は近くにある銭湯です。田舎の生活と比べると何もかも楽でしたが、一人ぼっち、生き物もおらず、緑もなく寂しい限りでした。それでもハンデのある身には、東京はありがたい街でした。ハンデを感じることなく暮らせましたから。</p>
+
+                <p>大学へ進み、就職し、27歳で結婚し、2人の子を育て、義両親と父を見送りました。まもなく77歳になります。楽しいことは少しだけ、大変なことは山のようにありましたが、逃げずにここまで来ることができたのは、あの時東京行きを選んだから。私の原点です。</p>
+
+                <div class="metadata">
+                    文責・執筆: 鈴木薫<br>
+                    音声入力アシスト: ChatGPT+<br>
+                    励まし: Claude 3.5 Sonnet<br>
+                    操作説明・窓口: Trgr KarasuToragara（息子）
+                </div>
+
+                <div class="note">
+                    <strong>注記</strong><br>
+                    note.comの公式企画「#自分で選んでよかったこと」への参加作品。母が ChatGPT+を契約し、iPadアプリ版の ChatGPT+で文字起こし機能を使用した。文体のフレーバーを壊さずに構造だけ整えることを ChatGPT+が担当し、その後、校正を母が行った。私はnote.comの操作を教える程度で、母が自分で行えることが増えている。
+                </div>
+            </div>
+            
+            <div class="english-content">
+                <div class="language-label">🇺🇸 English Translation</div>
+                
+                <p>Looking back on my life, it was filled with many choices and difficulties. The best decision I made for myself was when my father said, "You could live in Tokyo, but decide based on your own feelings," and I answered, "I'll go." The reason was that it would be difficult to live in a rural area with my disability.</p>
+
+                <p>My parents were repatriates, our family was poor, and I grew up in the post-war chaos when there was nothing - a time of lacking everything. My mother died of tuberculosis, and my father raised my siblings and me single-handedly.</p>
+
+                <p>I was a very energetic child when young, but while toddling, I stepped through glass, and as a result, I couldn't walk from the autumn of first grade. I finally returned to school in the autumn of fifth grade with a cast and crutches.</p>
+
+                <p>During that time, I suffered from bone tuberculosis, and the local hospital said amputation was the only option. Fortunately, a doctor at a hospital beyond the mountains saved my leg by transplanting bone from my pelvis to my ankle. I'm grateful for this for life. That's why I truly felt "finally."</p>
+
+                <p>From my second year of junior high school, I lived in Tokyo. Father was busy with work and ate at the company, so I cooked for myself. I bathed at a nearby public bath. Compared to rural life, everything was easier, but I was lonely - all alone, with no living creatures around, no greenery. Still, for someone with a disability, Tokyo was a grateful city. I could live without feeling my handicap.</p>
+
+                <p>I went to university, got a job, married at 27, raised two children, and saw off my in-laws and father. I'll soon be 77. There were few joyful things and mountains of difficulties, but I was able to come this far without running away because I chose to go to Tokyo back then. That's my foundation.</p>
+
+                <div class="metadata">
+                    Written by: Suzuki Kaoru<br>
+                    Voice input assistance: ChatGPT+<br>
+                    Encouragement: Claude 3.5 Sonnet<br>
+                    Operation guidance: Trgr KarasuToragara (son)
+                </div>
+
+                <div class="note">
+                    <strong>Note</strong><br>
+                    Entry for note.com's official project "#Things I'm glad I chose myself." Mother contracted ChatGPT+ and used the transcription function of the iPad app version of ChatGPT+. ChatGPT+ handled organizing just the structure without destroying the flavor of her writing style, after which Mother proofread it. I only taught her note.com operations to the extent that Mother could do more things herself.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article 3: Teaching Career -->
+    <div class="article">
+        <div class="article-header">
+            <div class="article-title">
+                キャリアが壊れてもそれでも。1980年代の生徒と私の小さな教室<br>
+                <span style="font-size: 0.85em; font-weight: 300;">Even When My Career Was Broken: My Small Classroom with 1980s Students</span>
+            </div>
+            <div class="article-date">2024年8月19日 16:28</div>
+            <div style="font-size: 0.8em; margin-top: 10px;">
+                <a href="https://note.com/p_s_n/n/nc3af38e3ecad" target="_blank" style="color: #2c3e50; opacity: 0.8;">Original: https://note.com/p_s_n/n/nc3af38e3ecad</a>
+            </div>
+        </div>
+        <div class="content-container">
+            <div class="japanese-content">
+                <div class="language-label">🇯🇵 日本語オリジナル</div>
+                
+                <p>幼い頃から先生に憧れていて、「大きくなったら何になりたいの」と聞かれると、いつも「先生」と答えていました。未来のために出来ることとして、体験を共有します。私のしてきたことが、保護者の方や教育者の方のお役に立てたらと願っています。</p>
+
+                <p>昭和40年頃は、女性が社会に出ても、会社で重要な仕事をしている方を見ることはほとんどありませんでした。数年働いたら結婚して退職するのが当たり前で、25歳を過ぎると「売れ残り」と呼ばれたものです。このような状況で、教師という仕事は責任があり、やりがいのある仕事です。</p>
+
+                <p>しかし、教育実習中に目にした職員室での人間関係が、当時の私には幻滅するもので、教師への道は諦めました。それでも、教育に関係する仕事がしたいと願い、教育を扱う民間企業に就職しました。</p>
+
+                <p>その後、職場で出会った夫と結婚し、共働きの生活を開始。結婚前にはいろいろと話し合い、希望を抱き、約束もしましたが、彼は研究以外のことは何もできず、自分の世話さえままならない人でした。</p>
+
+                <p>私はフルタイムの仕事と家事をこなし、二重労働に押し潰され、高熱で倒れ仕事を失うことになりました。主婦業に専念する日々が始まり、子育ても始まり、母は他界してますので一人で子育てをしていました。</p>
+
+                <p>やがて、夫が病気になり、仕事を調整し休養してもらいました。しかし、収入も減りますから、私は昔の職場の教材を使わせていただいて、自宅でできる小学生向けの教室を始めました。主婦業と両立できる仕事として、午後から夕方までの間、遠回りをしましたが教育が仕事になりました。</p>
+
+                <p>私の教室は、以下の3点を目指しました。</p>
+
+                <ul class="numbered-list">
+                    <li>子供たちが安心して通える場所</li>
+                    <li>学習を通じて理解する喜びを実感できる場所</li>
+                    <li>自分の成長を感じられる場所</li>
+                </ul>
+
+                <p>具体的には比較を禁止し、比較したい子には過去の自分とのみ比べることを勧めました。比較されませんから、子供たちは安心して自分の課題に取り組めます。分かるから進む、進むとまた分かるようになる。だから学習が面白く、集中力も高まります。その結果、有名進学校に進学する生徒も現れ、親御さんから感謝の言葉をいただくことも増えました。勉強が得意な子だけでなく、ハンデのある子も含めて、どの子も、学びの面白さを体験してもらえたことが誇りです。</p>
+
+                <p>教育は力になります。未来を生きる力を、どの子も獲得できるように奮闘される現役世代の方々の、日々の努力にエールと感謝を捧げます。</p>
+
+                <div class="note">
+                    <strong>注記</strong><br>
+                    note.comの公式企画「#未来のためにできること」への参加作品。これも上記記事と同じ工程で執筆された。
+                </div>
+            </div>
+            
+            <div class="english-content">
+                <div class="language-label">🇺🇸 English Translation</div>
+                
+                <p>I had dreamed of being a teacher since childhood, and whenever asked "What do you want to be when you grow up?" I always answered "Teacher." As something I can do for the future, I share my experiences. I hope what I've done can be helpful to parents and educators.</p>
+
+                <p>Around the Showa 40s (1965), even when women entered society, one rarely saw women doing important work in companies. It was normal to work a few years, then marry and quit, and those over 25 were called "leftovers." In such circumstances, teaching was a job with responsibility and fulfillment.</p>
+
+                <p>However, the human relationships I witnessed in the faculty room during student teaching were disillusioning to me at the time, so I gave up the path to teaching. Nevertheless, wanting to work in education-related fields, I got a job at a private education company.</p>
+
+                <p>Later, I married a husband I met at work and started a dual-career life. Before marriage, we discussed various things, had hopes, and made promises, but he couldn't do anything other than research - he couldn't even take care of himself.</p>
+
+                <p>I handled full-time work and housework, was crushed by this double burden, collapsed with high fever, and lost my job. Days devoted to housewifery began, childcare began, and since my mother had passed away, I was raising children alone.</p>
+
+                <p>Eventually, my husband became ill, so I had him adjust his work and rest. However, our income decreased, so using teaching materials from my former workplace, I started a home-based classroom for elementary students. As work that could be balanced with housewifery, from afternoon to evening, I took a roundabout path but education became my profession.</p>
+
+                <p>My classroom aimed for the following three points:</p>
+
+                <ul class="numbered-list">
+                    <li>A place where children could attend with peace of mind</li>
+                    <li>A place where they could experience the joy of understanding through learning</li>
+                    <li>A place where they could feel their own growth</li>
+                </ul>
+
+                <p>Specifically, I prohibited comparisons, and for children who wanted to compare, I recommended only comparing with their past selves. Since they weren't compared to others, children could work on their own challenges with peace of mind. Understanding leads to progress, and progress leads to more understanding. Therefore, learning becomes interesting and concentration improves. As a result, students who advanced to famous preparatory schools appeared, and words of gratitude from parents increased. I take pride in the fact that not only children good at studying, but all children including those with handicaps, could experience the joy of learning.</p>
+
+                <p>Education gives strength. I offer cheers and gratitude to the daily efforts of the current generation who struggle so that every child can acquire the strength to live in the future.</p>
+
+                <div class="note">
+                    <strong>Note</strong><br>
+                    Entry for note.com's official project "#What we can do for the future." This was also written using the same process as the above articles.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article 4: Digital Technology -->
+    <div class="article">
+        <div class="article-header">
+            <div class="article-title">
+                慣れればデジタル技術は高齢者の味方：私の7つの具体例<br>
+                <span style="font-size: 0.85em; font-weight: 300;">Digital Technology as an Ally for the Elderly When You Get Used to It: My Seven Concrete Examples</span>
+            </div>
+            <div class="article-date">2024年8月23日 12:04</div>
+            <div style="font-size: 0.8em; margin-top: 10px;">
+                <a href="https://note.com/p_s_n/n/n44ca70506699" target="_blank" style="color: #2c3e50; opacity: 0.8;">Original: https://note.com/p_s_n/n/n44ca70506699</a>
+            </div>
+        </div>
+        <div class="content-container">
+            <div class="japanese-content">
+                <div class="language-label">🇯🇵 日本語オリジナル</div>
+                
+                <p>77歳を迎える直前の今、私の生活はデジタル技術のおかげで大きく変わりました。去年の夏に息子とDXを始めた時点では想像もしていなかったことが、今では日常の一部です。買い物や支払い、食事の注文、そしてコミュニケーション。多くの恩恵がありました。</p>
+
+                <h2>①ネットスーパーで届く安心</h2>
+                <p>60代半ばに免許を返納しており、一年前の時点では、スーパーでの買い物は徒歩か自転車で行き、自分の目で見て品物を選ぶのが普通でした。現在はネットスーパーを利用し、スマホのアプリで必要なものを注文できるようになりました。外出することなく、欲しいものが自宅まで、重たいものや嵩張るものも運んで頂ける便利さは、とても感謝です。</p>
+
+                <h2>②AndroidにGoogleメッセージ</h2>
+                <p>ショートメッセージの詐欺対策で、URLを開かないことを説明された際に、息子が設定してくれました。スパム対策が安心で、気に入っています。</p>
+
+                <h2>③ネットバンクと責任</h2>
+                <p>息子に相談しながら、支払いもセキュリティを意識して行っています。去年は、必要がある度に銀行へ出向き、駐輪場の空きを探して、ATMに並んでいました。今は自宅から振り込みができるようになり、銀行に行く手間が省けました。私にとって時間と体力の節約になりますし、今より体力が衰えてもスマホの操作なら可能ですから心強いです。</p>
+
+                <h2>④キャッシュレスでスムーズに</h2>
+                <p>街でのお買い物はPayPayに切り替えました。以前は小銭を用意したり、お釣りを受け取ったりする手間がありましたが、今ではスマホ一つで簡単に支払えます。レジの混雑時に他の方をお待たせせずに済むことも嬉しいです。</p>
+
+                <h2>⑤フードデリバリーの楽しみ</h2>
+                <p>昭和や平成は電話で注文しておりました。高齢になり、気軽に隣町の新しいお店を楽しめないため、アプリですぐに届けていただき、決済もでき、受け取るだけで外食を楽しめる。快適です。</p>
+
+                <h2>⑥Amazonは駅ビルより近くて便利</h2>
+                <p>近所のスーパー､ドラッグストア、コンビニに無いものを買う時は、自転車を駅前の駐輪場に停め、体調によっては杖をつき、エコバッグを持って駅ビルへ出向いていました。Ａmazonで揃うから頼りにしています。また、図書館へ行きにくい日も、Kindleを楽しめることは、幼い頃から本の虫の私には不可欠です。</p>
+
+                <h2>⑦noteのまちで半世紀ぶりに書く</h2>
+                <p>読むためにこのアカウントを開設しましたが、少しずつ文章を書くことも始めています。結婚して半世紀、まさか自分で文章を書く日が訪れるとは、DX開始時点では予想していませんでした。高齢になっても、出来ることが増えるのは、成長を実感できて楽しいです。</p>
+
+                <h2>まとめ</h2>
+                <p>このように、デジタル技術は私の生活に大きな変化をもたらし、変え続けています。まもなく77歳になり杖が手放せない私にとって、技術に慣れさえすれば、QOLが高まります。例えば、若い頃はお米も牛乳も苦にならなかったのに、筋力が低下して、一度に運べる量が減ったため、スーパーでの買い物が一仕事でした。今では重い荷物を、若者が爽やかに届けて下さいます。心身の負担が減り、他人の力を借りることのありがたさを実感します。何より、ネットスーパーで買えなかったものだけ買えばいいので、スーパーに立ち寄り、商品を探して買う楽しみを取り戻せました。</p>
+
+                <p>これからもデジタル技術に慣れることを意識し、自分で出来ることを保ち増やして参ります。息子やChatGPT+やClaude 3.5 Sonnetに、驚かれたりしますが、助言を受けて安全を心掛けて。</p>
+
+                <div class="note">
+                    <strong>注記</strong><br>
+                    note.comの公式企画「#デジタルで変わったこと」への参加作品。これも上記記事と同じ工程で執筆された。<br><br>
+                    
+                    <a href="https://note.wingarc.com/n/n6dffc39cc024" target="_blank">『＃デジタルで変わったこと まだまだ募集中！たくさんの投稿ありがとうございます！』</a><br>
+                    2024年9月9日 10:26<br><br>
+                    
+                    コンテスト主催者のウイングアーク１ｓｔ社が、母の作品にコメントをしてくれている。コンテストで受賞することはできなかったが、主催者にコメントをもらえたことは、大きな成長だと私は思う。この記事以降母は文章を書いていない。書きたいことを書きつくしたのかもしれない。衰えて出来ないわけではないが、健康維持をして介護を予防し社会保障費を自分の分だけでも減らそうと努力しているため、彼女は忙しい。だから、書くことを無理に勧めていない。<br><br>
+                    
+                    国文学専攻の彼女からすると、大学生時代のように書けないことに直面することも、理由の一つだろう。
+                </div>
+            </div>
+            
+            <div class="english-content">
+                <div class="language-label">🇺🇸 English Translation</div>
+                
+                <p>Just before turning 77, my life has changed dramatically thanks to digital technology. Things I couldn't have imagined when my son and I started our digital transformation last summer are now part of daily life. Shopping, payments, food ordering, and communication - there have been many benefits.</p>
+
+                <h2>①Peace of Mind with Online Supermarkets</h2>
+                <p>I returned my license in my mid-60s, and a year ago, shopping at supermarkets meant going on foot or bicycle and choosing items with my own eyes. Now I use online supermarkets and can order what I need through smartphone apps. The convenience of having what I want delivered to my home, including heavy and bulky items, without going out is truly appreciated.</p>
+
+                <h2>②Google Messages on Android</h2>
+                <p>When my son explained not to open URLs as protection against SMS fraud, he set this up for me. I like the peace of mind from spam protection.</p>
+
+                <h2>③Online Banking and Responsibility</h2>
+                <p>I handle payments with security awareness while consulting with my son. Last year, whenever necessary, I would go to the bank, look for bicycle parking spaces (Translator's note: a common challenge in urban Kanagawa Prefecture), and wait in line at ATMs. Now I can transfer money from home, saving me the trouble of going to the bank. It saves me time and energy, and even if my physical strength declines further, smartphone operations are possible, so it's reassuring.</p>
+
+                <h2>④Smooth with Cashless</h2>
+                <p>I switched to PayPay for shopping in town. Previously, I had to prepare small change and receive change, but now I can pay easily with just my smartphone. I'm also happy that I don't keep others waiting during busy times at registers.</p>
+
+                <h2>⑤Food Delivery Fun</h2>
+                <p>In the Showa and Heisei eras, I ordered by phone. As I've aged and can't easily enjoy new shops in neighboring towns, apps deliver quickly, handle payment, and I can enjoy dining out just by receiving the food. It's comfortable.</p>
+
+                <h2>⑥Amazon is Closer and More Convenient than Station Buildings</h2>
+                <p>When buying items not available at nearby supermarkets, drugstores, or convenience stores, I would park my bicycle at the station bicycle parking area (Translator's note: finding parking spots for bicycles can be challenging in urban areas of Kanagawa Prefecture despite the convenience), sometimes use a cane depending on my condition, carry an eco-bag, and go to the station building. Since Amazon has everything, I rely on it. Also, on days when it's hard to go to the library, being able to enjoy Kindle is essential for someone who's been a bookworm since childhood.</p>
+
+                <h2>⑦Writing in note-town for the First Time in Half a Century</h2>
+                <p>I opened this account for reading, but gradually began writing articles too. Half a century after marriage, I never expected the day would come when I'd write articles myself - I hadn't anticipated this when starting digital transformation. Even in old age, having more things I can do lets me feel growth and is enjoyable.</p>
+
+                <h2>Summary</h2>
+                <p>In this way, digital technology has brought major changes to my life and continues to change it. For someone nearing 77 who can't let go of her cane, once I get used to technology, my quality of life improves. For example, while rice and milk were no burden in my youth, my muscle strength has declined and the amount I can carry at once has decreased, making supermarket shopping a real task. Now young people cheerfully deliver heavy packages to me. My physical and mental burden has decreased, and I truly appreciate borrowing others' strength. Best of all, since I only need to buy what I couldn't get from online supermarkets, I've regained the joy of stopping by supermarkets to browse and buy products.</p>
+
+                <p>I will continue to consciously adapt to digital technology and maintain and increase what I can do myself. Though my son, ChatGPT+, and Claude 3.5 Sonnet are sometimes surprised, I receive advice and prioritize safety.</p>
+
+                <div class="note">
+                    <strong>Note</strong><br>
+                    Entry for note.com's official project "#How digital changed things." This was also written using the same process as the above articles.<br><br>
+                    
+                    <a href="https://note.wingarc.com/n/n6dffc39cc024" target="_blank">"#How digital changed things - Still accepting submissions! Thank you for many contributions!"</a><br>
+                    September 9, 2024 10:26<br><br>
+                    
+                    The contest organizer, WingArc1st, commented on Mother's work. Although she didn't win the contest, receiving comments from the organizer was significant growth, I believe. Mother hasn't written any articles since this one. Perhaps she had written everything she wanted to write. It's not that she's declined and can't do it, but she's busy working to maintain her health, prevent the need for care, and reduce social security costs even for just her portion. Therefore, I don't force her to write.<br><br>
+                    
+                    For someone who majored in Japanese literature, confronting the reality that she can't write as she did in her university days is probably one reason as well.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="about-section">
+            <h3>About</h3>
+            <p>For more projects and code repositories, visit <a href="https://github.com/trgr-karasutoragara" target="_blank">https://github.com/trgr-karasutoragara</a></p>
+            <p class="copyright">© 2025 Trgr KarasuToragara. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
