@@ -6,6 +6,11 @@
 
 This repository contains the complete implementation of a 2-year proven system for supporting a 77-year-old user with technology while maintaining dignity and autonomy. **I've successfully transformed abstract ethical principles into concrete, deployable frameworks.**
 
+## Update
+The Kindle edition of “Digital Dignity at 77(2)” is live; use this repository to explore and reproduce every ethical AI workflow discussed in the text.
+
+https://www.amazon.com/dp/B0FGH5ZYVR
+
 ## What's Here
 
 ### 🔧 **Technical Implementation**
