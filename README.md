@@ -11,6 +11,16 @@ The Kindle edition of “Digital Dignity at 77(2)” is live; use this repositor
 
 https://www.amazon.com/dp/B0FGH5ZYVR
 
+Paid Amazon
+Bestseller Rankings:
+
+* \#853 overall in Books in Foreign Languages
+  / #1 in Computer Science
+  / #5 in Sociology
+  / #14 in Philosophy
+  Achieved the above rankings.
+July 7, 2025
+
 ## What's Here
 
 ### 🔧 **Technical Implementation**
