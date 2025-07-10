@@ -95,7 +95,7 @@ This work bridges the gap between AI ethics theory and practical welfare applica
 2. Examine [primary sources](https://trgr-karasutoragara.github.io/) for validation
 3. Deploy [RSS system](https://github.com/trgr-karasutoragara/daily-news-for-digital-dignity) for immediate testing
 4. Adapt framework to your specific use case
-5. Read the paper "[future AI x dignity: Two-Year Zero-Incident Report and Primary Sources](https://www.academia.edu/130269659/future_AI_x_dignity_Two_Year_Zero_Incident_Report_and_Primary_Sources)" for theoretical background
+5. Read the paper "[future AI x dignity: Two-Year Zero-Incident Report and Primary Sources](https://www.academia.edu/130269659/future_AI_x_dignity_Two_Year_Zero_Incident_Report_and_Primary_Sources)" for theoretical background. It is also available on [Internet Archive](https://archive.org/details/future_AI_x_dignity_Two_Year_Zero_Incide).
 
 ---
 
