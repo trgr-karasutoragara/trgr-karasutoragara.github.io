@@ -1,5 +1,5 @@
-[![MIT](https://img.shields.io/github/license/trgr-karasutoragara/trgr-karasutoragara.github.io)](https://github.com/trgr-karasutoragara/trgr-karasutoragara.github.io)
-[![Stars](https://img.shields.io/github/stars/trgr-karasutoragara/trgr-karasutoragara.github.io?style=social)](https://github.com/trgr-karasutoragara/trgr-karasutoragara.github.io/stargazers)
+![MIT](https://img.shields.io/github/license/trgr-karasutoragara/trgr-karasutoragara.github.io)
+![Stars](https://img.shields.io/github/stars/trgr-karasutoragara/trgr-karasutoragara.github.io?style=social)
 ![Last Commit](https://img.shields.io/github/last-commit/trgr-karasutoragara/trgr-karasutoragara.github.io)
 
 
