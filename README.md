@@ -1,9 +1,10 @@
-[![License: MIT](https://img.shields.io/github/license/trgr-karasutoragara/zen-structure-4-u)](LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/trgr-karasutoragara/zen-structure-4-u?style=social)](https://github.com/trgr-karasutoragara/zen-structure-4-u/stargazers)
-![Last Commit](https://img.shields.io/github/last-commit/trgr-karasutoragara/zen-structure-4-u)
+[![License: MIT](https://img.shields.io/github/license/trgr-karasutoragara/trgr-karasutoragara.github.io)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/trgr-karasutoragara/trgr-karasutoragara.github.io?style=social)](https://github.com/trgr-karasutoragara/trgr-karasutoragara.github.io/stargazers)
+![Last Commit](https://img.shields.io/github/last-commit/trgr-karasutoragara/trgr-karasutoragara.github.io)
 
 
 <br>
+
 
 # future AI x dignity
 
