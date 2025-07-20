@@ -1,3 +1,10 @@
+[![License: MIT](https://img.shields.io/github/license/trgr-karasutoragara/zen-structure-4-u)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/trgr-karasutoragara/zen-structure-4-u?style=social)](https://github.com/trgr-karasutoragara/zen-structure-4-u/stargazers)
+![Last Commit](https://img.shields.io/github/last-commit/trgr-karasutoragara/zen-structure-4-u)
+
+
+<br>
+
 # future AI x dignity
 
 **A practical framework for implementing ethics in elderly tech support through AI integration**
